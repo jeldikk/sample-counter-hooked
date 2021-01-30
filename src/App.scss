@@ -1,0 +1,14 @@
+.app{
+  width: 98vw;
+  height: 95vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .buttons{
+      display: flex;
+      
+  }
+}

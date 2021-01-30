@@ -1,24 +1,62 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useReducer} from "react"
+import './App.scss';
+
+import CountDisplay from "./components/count-display/count-display.component"
+import DecrementButton from "./components/decrement-button/decrement-button.component"
+import IncrementButton from "./components/increment-button/increment-button.component"
+import CloseButton from "./components/close-button/close-button.component"
+
+
+const initialState = {
+  count: 0,
+  recentAction: null
+}
+
+const reducer = function (state, action){
+  switch(action.type){
+    case 'INCREMENT':
+      return {
+        ...state,
+        count: state.count + 1
+      }
+    case 'DECREMENT':
+      return {
+        ...state,
+        count: state.count - 1
+      }
+    case 'SET_RECENT_ACTION':
+      return {
+        ...state,
+        recentAction: action.payload
+      }
+    case 'CLEAR':
+      return {
+        ...state,
+        count: 0
+      }
+    default:
+      return state
+  }
+}
 
 function App() {
+
+  const [state, dispatch] = useReducer(reducer, initialState)
+
+  // console.log(state)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+    <div className="app">
+      <h3>Count display testing with Hooks</h3>
+      <CountDisplay compState={state} />
+      <div className="buttons">
+        <DecrementButton actionDispatcher={dispatch} compState={state} />
+        <IncrementButton actionDispatcher={dispatch} compState={state} />
+        <CloseButton actionDispatcher={dispatch} compState={state} />
+      </div>
     </div>
+    
   );
 }
 
