@@ -1,8 +1,17 @@
-import React from 'react'
+import React, {useMemo} from 'react'
 
 import "./decrement-button.styles.scss"
 
 const DecrementButton = ({actionDispatcher, compState}) => {
+
+    const {recentAction} = compState;
+
+    const recent = useMemo(() => {
+        // console.log("used in useMemo");
+        return recentAction === 'decr' ? 'recent' : ''
+    },[recentAction])
+
+    // console.log({recent})
 
     const clickHandler = () => {
         actionDispatcher({
@@ -15,7 +24,7 @@ const DecrementButton = ({actionDispatcher, compState}) => {
     }
 
     return (
-        <div className={`decrement-button ${compState.recentAction === 'decr' ? 'recent' : ''}`} onClick={clickHandler}>
+        <div className={`decrement-button ${recent}`} onClick={clickHandler}>
             Decrease (-)
         </div>
     )

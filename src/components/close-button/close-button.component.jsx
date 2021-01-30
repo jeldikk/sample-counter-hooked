@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useMemo} from 'react'
 
 import "./close-button.styles.scss"
 
@@ -9,7 +9,20 @@ import "./close-button.styles.scss"
 //     }
 // }
 
+// function calculateIsRecent(recent){
+//     return recent === 'clear' ? 'recent' : ''
+// }
+
 const CloseButton = ({actionDispatcher, compState}) => {
+
+    const {recentAction} = compState;
+
+    const recent = useMemo(() => {
+        // console.log("used in useMemo");
+        return recentAction === 'clear' ? 'recent' : ''
+    },[recentAction])
+
+    // console.log({recent})
 
     const clickHandler = (event) => {
         actionDispatcher({
@@ -24,7 +37,7 @@ const CloseButton = ({actionDispatcher, compState}) => {
     }
     
     return (
-        <div className={`close-button ${compState.recentAction === 'clear' ? 'recent' : ''}`} onClick={clickHandler}>
+        <div className={`close-button ${recent}`} onClick={clickHandler}>
             Clear Count
         </div>
     )

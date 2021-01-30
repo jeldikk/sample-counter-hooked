@@ -1,9 +1,19 @@
-import React from 'react'
+import React, {useMemo} from 'react'
 
 import "./increment-button.styles.scss"
 
 const IncrementButton = ({actionDispatcher, compState}) => {
-    console.log(compState)
+
+
+    const {recentAction} = compState;
+
+    const recent = useMemo(() => {
+        // console.log("used in useMemo");
+        return recentAction === 'incr' ? 'recent' : ''
+    },[recentAction])
+
+    // console.log({recent})
+
     const clickHandler = (event) => {
         actionDispatcher({
             type: 'INCREMENT'
@@ -14,7 +24,7 @@ const IncrementButton = ({actionDispatcher, compState}) => {
         })
     }
     return (
-        <div className={`increment-button ${compState.recentAction === 'incr' ? 'recent' : ''}`} onClick={clickHandler}>
+        <div className={`increment-button ${recent}`} onClick={clickHandler}>
             Increase(+)
         </div>
     )
