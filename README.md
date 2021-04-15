@@ -4,6 +4,9 @@ Generally, this is done by using useState to maintain a local state in each comp
 
 So In this situation we can use useReducer hook. the skeleton of Reducer hook is; it takes a reducer and an intial state and returns an array of state and dispatch functions of global store. We then pass these dispatch to invoked actions by child components and state binded to DOM for rendering.
 
+
+Here is the tutorial followed [Click here](https://markpollmann.com/react-moving-to-typescript) for migration
+
 1. Firstly for migrating a javascript react project to typescript we need to install few type definitions. For this use the below command
 ```sh
 $ npm install --save typescript @types/node @types/react @types/react-dom @types/jest
@@ -11,6 +14,35 @@ $ npm install --save typescript @types/node @types/react @types/react-dom @types
 2. initiate a typescript configuration file using installed typescript compiler
 ```sh
 $ npx tsc --init
+```
+
+Here is the typescript config file configurations
+```json
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react"
+  },
+  "include": [
+    "src"
+  ]
+}
 ```
 
 ---
